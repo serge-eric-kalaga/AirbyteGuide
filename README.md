@@ -1,19 +1,18 @@
-# Airbyte - Guide d'implémentation
+# 🚀 Airbyte - Guide d'implémentation
 
-## Présentation
+## 📝 Présentation
 Ce projet met en place une synchronisation de données entre deux bases PostgreSQL (source et destination) à l'aide d'Airbyte, avec un exemple de base de données de gestion de tâches (utilisateur, tache).
 
-## Prérequis
-- Docker et Docker Compose installés
-- Accès à un terminal bash
+## ⚙️ Prérequis
+- 🐳 Docker et Docker Compose installés
+- 💻 Accès à un terminal bash
 
-## Structure du projet
+## 🗂️ Structure du projet
 - `docker-compose.yaml` : Configuration des services Docker (Postgres source/destination)
 - `init-mysql-src.sql` : Script d'initialisation de la base source (tables, données)
 - `init-mysql-des.sql` : Script d'initialisation de la base destination (optionnel)
-- `postgres/` : Dossier pour d'autres scripts SQL
 
-## Démarrage rapide
+## 🚦 Démarrage rapide
 
 1. **Lancer les conteneurs**
    ```bash
@@ -27,7 +26,7 @@ Ce projet met en place une synchronisation de données entre deux bases PostgreS
 3. **Initialiser la base source**
    - Le script `init-mysql-src.sql` est exécuté automatiquement à la création du conteneur.
 
-> **Remarque importante :**
+> **💡 Remarque importante :**
 > Il est nécessaire d'activer l'extension vector dans les deux bases de données (source et destination) avec la commande suivante :
 > ```sql
 > CREATE EXTENSION IF NOT EXISTS vector;
@@ -41,12 +40,12 @@ Ce projet met en place une synchronisation de données entre deux bases PostgreS
 > ```
 > Adaptez le nom du paquet (`postgresql-<version>-pgvector`) à la version de PostgreSQL installée.
 
-## Installation d'Airbyte
+## 🛠️ Installation d'Airbyte
 
 Pour installer Airbyte OSS, suivez le guide officiel :  
-https://docs.airbyte.com/platform/using-airbyte/getting-started/oss-quickstart
+🔗 https://docs.airbyte.com/platform/using-airbyte/getting-started/oss-quickstart
 
-## Configuration de la réplication logique (pour Airbyte)
+## 🔄 Configuration de la réplication logique (pour Airbyte)
 
 1. **Préremplir la configuration source Postgres**
 2. **Accorder les droits de réplication à l'utilisateur**
@@ -85,12 +84,12 @@ https://docs.airbyte.com/platform/using-airbyte/getting-started/oss-quickstart
    -- CREATE PUBLICATION airbyte_publication FOR TABLE utilisateur, tache;
    ```
 
-## Exemple de tables
+## 📋 Exemple de tables
 
 - Table `utilisateur` : id, username, email
 - Table `tache` : id, title, description, due_date, is_completed, utilisateur_id
 
-## Ressources
+## 📚 Ressources
 - Guide d'installation Airbyte OSS : https://docs.airbyte.com/platform/using-airbyte/getting-started/oss-quickstart
 - Documentation Airbyte : https://docs.airbyte.com/
 - Documentation Postgres : https://www.postgresql.org/docs/
