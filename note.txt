@@ -1,0 +1,34 @@
+Base de donnees source
+
+Étape 1 : Préremplir votre configuration source Postgres
+
+Étape 2 : Accorder des autorisations supplémentaires à l’utilisateur en lecture seule
+    ALTER USER <user_name> REPLICATION;
+
+Étape 3 : Activer la réplication logique sur votre base de données Postgres
+    postgres -c wal_level=logical \
+                    -c max_replication_slots=10 \
+                    -c max_wal_senders=10
+
+Étape 4 : créer un emplacement de réplication sur votre base de données Postgres
+    SELECT pg_create_logical_replication_slot('airbyte_slot', 'pgoutput');
+
+Étape 5 : Créer des identités de publication et de réplication pour chaque table Postgres
+    1- Ajoutez l'identité de réplication (la méthode de distinction entre les lignes) pour chaque table que vous souhaitez répliquer :
+        
+        DO $$
+        DECLARE
+            r RECORD;
+        BEGIN
+            FOR r IN SELECT tablename 
+                    FROM pg_tables 
+                    WHERE schemaname = 'public'
+            LOOP
+                EXECUTE format('ALTER TABLE public.%I REPLICA IDENTITY DEFAULT;', r.tablename);
+            END LOOP;
+        END $$;
+    
+    2- Créez la publication Postgres. Vous devez inclure toutes les tables à répliquer dans la publication :
+        
+        CREATE PUBLICATION airbyte_publication FOR ALL TABLES;
+
