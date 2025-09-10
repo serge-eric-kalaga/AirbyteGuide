@@ -41,6 +41,11 @@ Ce projet met en place une synchronisation de données entre deux bases PostgreS
 > ```
 > Adaptez le nom du paquet (`postgresql-<version>-pgvector`) à la version de PostgreSQL installée.
 
+## Installation d'Airbyte
+
+Pour installer Airbyte OSS, suivez le guide officiel :  
+https://docs.airbyte.com/platform/using-airbyte/getting-started/oss-quickstart
+
 ## Configuration de la réplication logique (pour Airbyte)
 
 1. **Préremplir la configuration source Postgres**
@@ -86,6 +91,7 @@ Ce projet met en place une synchronisation de données entre deux bases PostgreS
 - Table `tache` : id, title, description, due_date, is_completed, utilisateur_id
 
 ## Ressources
+- Guide d'installation Airbyte OSS : https://docs.airbyte.com/platform/using-airbyte/getting-started/oss-quickstart
 - Documentation Airbyte : https://docs.airbyte.com/
 - Documentation Postgres : https://www.postgresql.org/docs/
 
